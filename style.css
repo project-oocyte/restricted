@@ -1,0 +1,97 @@
+/* PROJECT OOCYTE — PHASE 1 */
+:root {
+  --bg: #000;           /* deep black */
+  --fg: #d9ffe2;        /* cold green-white */
+  --muted: #8fbfa4;     /* desaturated terminal green */
+  --accent: #c0ffd2;    /* lighter for highlights */
+  --warn: #ffd29e;      /* amber warning */
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  letter-spacing: 0.02em;
+}
+
+.wrap {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 6rem 1.25rem 4rem;
+}
+
+/* Subtle flicker + scanlines for that leaked-console vibe */
+.crt {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background:
+    repeating-linear-gradient( to bottom, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 1px, transparent 2px, transparent 3px ) ,
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,0.035), transparent 40%);
+  mix-blend-mode: soft-light;
+  animation: flicker 6s infinite steps(60);
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 0.05; }
+  50% { opacity: 0.12; }
+}
+
+.header { margin-bottom: 2rem; }
+.project { font-size: 1.5rem; margin: 0.25rem 0 0.5rem; color: var(--accent); }
+.project span { text-shadow: 0 0 .25rem rgba(192,255,210,.5); }
+
+.tag { color: var(--muted); opacity: 0.95; }
+.type { color: var(--warn); }
+
+.panel {
+  border: 1px solid rgba(192,255,210,0.15);
+  padding: 1rem;
+  margin: 1rem 0;
+  background: linear-gradient( to bottom, rgba(255,255,255,0.02), rgba(255,255,255,0.005) );
+  box-shadow: 0 0 0.5rem rgba(192,255,210,0.05) inset;
+}
+.panel p { margin: 0.25rem 0; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.5rem 1rem;
+}
+.kv { display: grid; grid-template-columns: 1.2fr 1fr; gap: 0.25rem 0.75rem; align-items: baseline; }
+.k { color: var(--muted); }
+.v { color: var(--fg); }
+
+.percent { position: relative; }
+.percent::after {
+  content: "_";
+  margin-left: .25ch;
+  animation: caret 1.2s steps(1) infinite;
+}
+@keyframes caret { 50% { opacity: 0; } }
+
+.blink { animation: blink 1.2s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0.35; } }
+
+.warnings p { color: var(--warn); }
+
+.divider { margin-top: 2rem; text-align: center; opacity: 0.8; color: var(--muted); }
+
+/* Optional hidden controls & egg link */
+.stealth {
+  background: transparent; border: 0; color: var(--muted); cursor: pointer;
+  opacity: 0.5; margin-top: .75rem; font: inherit; text-decoration: none;
+}
+.stealth:hover { opacity: 0.85; color: var(--fg); }
+
+.egg {
+  position: fixed; bottom: .5rem; right: .5rem; width: 8px; height: 8px; color: transparent;
+}
+
+/* Mobile spacing */
+@media (max-width: 520px) {
+  .wrap { padding-top: 4rem; }
+}
