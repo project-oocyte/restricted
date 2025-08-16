@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Oocyte – Transmission Log</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <h1 class="project"><span>PROJECT OOCYTE</span> — TRANSMISSION LOG</h1>
+      <p class="tag">[CLASSIFIED] <span class="type">PHASE 1</span></p>
+    </header>
+
+    <section id="log" class="panel">
+      <!-- Dialogue will appear here -->
+       <div id="monitor" class="percent"></div> <!-- Flickering caret -->
+    </section>
+
+    <div class="divider">— END OF LOG —</div>
+    <p><a href="index.html">RETURN TO INCUBATION</a></p>
+  </div>
+
+  <div class="crt"></div>
+
+  <script>
+    const transmissions = [
+      ["[2025-08-16 — 14:08] Observation: Redstone cycles engaged. Initial trials completed. Structures remain stable.", "2025-08-16T18:08:00Z"],
+      ["[2025-08-16 — 16:11] Analysis: Minor feedback detected in circuit loops. Adjustments recommended.", "2025-08-16T20:11:00Z"],
+      ["[2025-08-16 — 18:04] Notes: Components behave as predicted. Unexpected resonance in sector 3. Documented.", "2025-08-16T22:04:00Z"],
+      ["[2025-08-16 — 20:09] Summary: Research phase progressing. Core patterns confirmed. Proceeding with extended testing.", "2025-08-17T00:09:00Z"],
+
+      ["[2025-08-17 — 14:06] Acquisition: Stockpiles assembled. Materials verified against alpha schematics.", "2025-08-17T18:06:00Z"],
+      ["[2025-08-17 — 16:13] Inventory Check: Supplies secured. Redundant storage established. External observation undetected.", "2025-08-17T20:13:00Z"],
+      ["[2025-08-17 — 18:08] Logistics: Conveyance systems optimized. Resources staged near central hub.", "2025-08-17T22:08:00Z"],
+      ["[2025-08-17 — 20:12] Status: Preparations complete. All components accounted for. Awaiting next directive.", "2025-08-18T00:12:00Z"],
+
+      ["[2025-08-18 — 14:09] Entry: Portals activated. Alternate grids accessed. Energy readings stable.", "2025-08-18T18:09:00Z"],
+      ["[2025-08-18 — 16:07] Exploration: Unknown landscapes observed. Potential applications noted. Minimal interference.", "2025-08-18T20:07:00Z"],
+      ["[2025-08-18 — 18:12] Experiment: Structures tested under alternate gravity. Response aligns with simulations.", "2025-08-18T22:12:00Z"],
+      ["[2025-08-18 — 20:03] Extraction: Data logged. Return to primary environment successful. Analysis underway.", "2025-08-19T00:03:00Z"],
+
+      ["[2025-08-19 — 14:05] Routine Check: Systems nominal. Minor recalibration performed.", "2025-08-19T18:05:00Z"],
+      ["[2025-08-19 — 16:11] Status: No anomalies detected. Observation continues.", "2025-08-19T20:11:00Z"],
+      ["[2025-08-19 — 18:08] Notes: Environmental scans show standard deviation.", "2025-08-19T22:08:00Z"],
+      ["[2025-08-19 — 20:14] Summary: Day concluded without incident.", "2025-08-20T00:14:00Z"],
+
+      ["[2025-08-20 — 14:09] Routine Check: Stability maintained. No external signals detected.", "2025-08-20T18:09:00Z"],
+      ["[2025-08-20 — 16:12] Observation: Minor fluctuations logged. Adjustments pending.", "2025-08-20T20:12:00Z"],
+      ["[2025-08-20 — 18:06] Notes: System remains dormant.", "2025-08-20T22:06:00Z"],
+      ["[2025-08-20 — 20:11] Summary: End of day. All units stand by.", "2025-08-21T00:11:00Z"],
+
+      ["[2025-08-21 — 14:07] Commander Cluck: Coordinates synchronized. Yolk Lord, status report.", "2025-08-21T18:07:00Z"],
+      ["[2025-08-21 — 14:12] The Yolk Lord: Alpha conduits operational. No interference.", "2025-08-21T18:12:00Z"],
+      ["[2025-08-21 — 14:11] Eggxecutioner: Payload readiness 87%. Minor calibrations in progress.", "2025-08-21T18:11:00Z"],
+      ["[2025-08-21 — 15:04] Commander Cluck: Redstone links reinforced. Confirm execution alignment.", "2025-08-21T19:04:00Z"],
+      ["[2025-08-21 — 15:09] The Yolk Lord: All sectors nominal. Alternate paths scanned.", "2025-08-21T19:09:00Z"],
+      ["[2025-08-21 — 15:13] Eggxecutioner: Energy fluctuations within expected thresholds.", "2025-08-21T19:13:00Z"],
+      ["[2025-08-21 — 16:06] Commander Cluck: Status check. Any anomalies?", "2025-08-21T20:06:00Z"],
+      ["[2025-08-21 — 16:02] The Yolk Lord: Minor resonance in Sector Y, non-critical.", "2025-08-21T20:02:00Z"],
+      ["[2025-08-21 — 16:10] Eggxecutioner: Synchronization stable. Payload dormant.", "2025-08-21T20:10:00Z"],
+      ["[2025-08-21 — 17:08] Commander Cluck: Observation posts updated. Confirm readiness.", "2025-08-21T21:08:00Z"],
+      ["[2025-08-21 — 17:03] The Yolk Lord: Observation posts fully operational.", "2025-08-21T21:03:00Z"],
+      ["[2025-08-21 — 17:09] Eggxecutioner: Backup systems engaged. No external signals.", "2025-08-21T21:09:00Z"],
+      ["[2025-08-21 — 18:11] Commander Cluck: Final calibration. Redstone feedback?", "2025-08-21T22:11:00Z"],
+      ["[2025-08-21 — 18:02] The Yolk Lord: Feedback minimal. Adjusted per alpha plan.", "2025-08-21T22:02:00Z"],
+      ["[2025-08-21 — 18:08] Eggxecutioner: Energy distribution normalized.", "2025-08-21T22:08:00Z"],
+      ["[2025-08-21 — 19:06] Commander Cluck: Confirm phase alignment. All units responsive?", "2025-08-21T23:06:00Z"],
+      ["[2025-08-21 — 19:05] The Yolk Lord: Confirmed. Systems green.", "2025-08-21T23:05:00Z"],
+      ["[2025-08-21 — 19:10] Eggxecutioner: Awaiting next directive. No anomalies detected.", "2025-08-21T23:10:00Z"],
+      ["[2025-08-21 — 20:09] Commander Cluck: Phase 1 prep near completion. Maintain silence.", "2025-08-22T00:09:00Z"],
+      ["[2025-08-21 — 20:03] The Yolk Lord: Acknowledged. Monitoring continues.", "2025-08-22T00:03:00Z"],
+      ["[2025-08-21 — 20:12] Eggxecutioner: End of cycle. Standing by.", "2025-08-22T00:12:00Z"],
+
+      ["[2025-08-22 — 14:07] Initiation: Dispensers with sunlight detectors installed. Systems calibrated.", "2025-08-22T18:07:00Z"],
+      ["[2025-08-22 — 16:09] Verification: Operational checks passed. No anomalies reported.", "2025-08-22T20:09:00Z"],
+      ["[2025-08-22 — 18:06] Standby: Final alignment confirmed. Command protocols set.", "2025-08-22T22:06:00Z"],
+      ["[2025-08-22 — 19:12] Transmission Lost: Signal terminated unexpectedly. No further data received.", "2025-08-23T00:12:00Z"]
+    ];
+
+    const log = document.getElementById("log");
+    const now = new Date();
+
+    // Remove existing monitor caret if any
+    let monitor = document.getElementById("monitor");
+    if (!monitor) {
+      monitor = document.createElement("div");
+      monitor.id = "monitor";
+      monitor.classList.add("percent");
+      log.appendChild(monitor);
+    }
+
+    transmissions.forEach(([text, time]) => {
+      const releaseTime = new Date(time);
+      if (now >= releaseTime) {
+        const p = document.createElement("p");
+        // Day 6 intercepted messages
+        if (text.includes("Commander Cluck") || text.includes("The Yolk Lord") || text.includes("Eggxecution")) {
+          p.classList.add("intercepted");
+        }
+        p.textContent = text;
+        // Insert before monitor caret
+        log.insertBefore(p, monitor);
+      }
+    });
+
+  </script>
+</body>
+</html>
+
