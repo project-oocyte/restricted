@@ -138,3 +138,18 @@ a:hover {
   white-space: nowrap; /* prevent wrapping */
   line-height: 1.5;
 }
+
+.feed {
+  margin-top: 2rem;
+  text-align: center;
+  border: 1px solid var(--muted);
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.monitor {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 15px var(--accent);
+}
