@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stage 3 — Gestation</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .coords {
+      font-family: monospace;
+      font-size: 1.2rem;
+      color: var(--accent);
+      text-align: center;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="crt"></div>
+
+  <main class="wrap">
+    <header class="header">
+      <div class="tag type">[INTERNAL FILE]</div>
+      <h1 class="project">PROJECT: <span>OOCYTE</span></h1>
+      <div class="tag">STATUS: PHASE 4 — <span class="blink">GESTATION</span></div>
+    </header>
+
+    <section class="panel">
+      <p>Emergence is inevitable.<br>Trace the origin point.</p>
+      <div class="coords" id="coords">[COORDINATES LOADING...]</div>
+      <p>6 coordinates. <br> New one cycles every 10 seconds.</p>
+    </section>
+
+    <footer class="footer">
+      <div class="divider">— END OF ENTRY POINT —</div>
+      <p class="glitch">Awaiting input...</p>
+    </footer>
+  </main>
+
+  <script>
+    const coordinates = [
+      "X: -67, Y: 117, Z: -572", // E_E__E__E
+      "X: 199, Y: 78, Z: -64", //   _M_______
+      "X: 496, Y: 74, Z: -222",  // ___R_____
+      "X: 482, Y: 70, Z: 30", //    ____G____
+      "X: 116, Y: 71, Z: 164", //   ______N__
+      "X: -10, Y: 87, Z: 112", //   _______C_
+    ];
+
+    const coordsElement = document.getElementById("coords");
+    let index = 0;
+
+    function cycleCoords() {
+      coordsElement.textContent = coordinates[index];
+      index = (index + 1) % coordinates.length;
+    }
+
+    // Start cycling every 3 seconds
+    cycleCoords();
+    setInterval(cycleCoords, 10000);
+  </script>
+</body>
+</html>
